@@ -19,6 +19,8 @@ extends CharacterBody2D
 @onready var dash_tutorial: RichTextLabel = $"Dash Tutorial"
 @onready var wall_tutorial: RichTextLabel = $"Wall Tutorial"
 @onready var attack_tutorial: RichTextLabel = $"Attack Tutorial"
+@onready var up: ColorRect = $"../All UIs/Cutscene Stuff/Up"
+@onready var down: ColorRect = $"../All UIs/Cutscene Stuff/Down"
 
 @export var WALK_SPEED := 55
 @export var RUN_SPEED := 145
@@ -73,6 +75,16 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	await get_tree().create_timer(SMOOTH_ENABLE_TIME).timeout
 	camera.position_smoothing_enabled = true
+	
+	cutscenes.stop()
+	global_position = Vector2(3230, 220)
+	CAN_CONTROL = true
+	camera.offset.y = -40
+	camera.zoom = Vector2(3, 3)
+	camera.position = Vector2(0, 0)
+	up.position = Vector2(0, -200)
+	down.position = Vector2(0, 1080)
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	#Can't Control

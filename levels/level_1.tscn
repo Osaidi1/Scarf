@@ -468,7 +468,7 @@ libraries = {
 position = Vector2(-30, 18)
 
 [node name="Player" parent="." node_paths=PackedStringArray("BARS") instance=ExtResource("1_bswci")]
-position = Vector2(47, 691)
+position = Vector2(3699.46, 1735)
 SMOOTH_ENABLE_TIME = 0.1
 BARS = NodePath("../All UIs/PlayerDock")
 
