@@ -799,16 +799,10 @@ shape = SubResource("RectangleShape2D_5ot28")
 [node name="Game Fin" parent="." instance=ExtResource("8_l53as")]
 position = Vector2(9324, 5337)
 
-[node name="Fin" parent="Game Fin/Text" index="0"]
-metadata/_edit_use_anchors_ = true
-
 [node name="at least for now" parent="Game Fin/Text" index="1"]
 metadata/_edit_use_anchors_ = true
 
 [node name="Credits" parent="Game Fin/Text" index="2"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Bye" parent="Game Fin/Text" index="3"]
 metadata/_edit_use_anchors_ = true
 
 [node name="All UIs" type="Control" parent="."]

@@ -1,9 +1,9 @@
 extends Area2D
 
-@onready var fin: Label = $"../Text/Fin"
+@onready var the_end: Label = $"../Text/The End"
 @onready var at_least_for_now: Label = $"../Text/at least for now"
 @onready var credits: Label = $"../Text/Credits"
-@onready var bye: Label = $"../Text/Bye"
+@onready var final_text: AnimationPlayer = $"../Final text"
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -12,11 +12,11 @@ func _on_body_entered(body: Node2D) -> void:
 		#Fin
 		
 		for i in range(3):
-			fin.visible_characters += 1
+			the_end.visible_characters += 1
 			await get_tree().create_timer(0.05).timeout
 		await get_tree().create_timer(3).timeout
 		for i in range(3):
-			fin.visible_characters -= 1
+			the_end.visible_characters -= 1
 			await get_tree().create_timer(0.05).timeout
 		await get_tree().create_timer(2).timeout
 		
@@ -44,14 +44,8 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		#Bye
 		
-		for i in range(3):
-			bye.visible_characters += 1
-			await get_tree().create_timer(0.05).timeout
-		await get_tree().create_timer(3).timeout
-		for i in range(3):
-			bye.visible_characters -= 1
-			await get_tree().create_timer(0.05).timeout
-		await get_tree().create_timer(2).timeout
+		final_text.play("scarf")
+		await !final_text.is_playing()
 		
 		# End
 		
