@@ -12,6 +12,8 @@ extends CharacterBody2D
 @onready var jump_buffer: Timer = $"jump buffer"
 @onready var cutscenes: AnimationPlayer = $"../Cutscenes"
 @onready var sword_sound: AudioStreamPlayer2D = $SwordSound
+@onready var sword_sound_2: AudioStreamPlayer2D = $SwordSound2
+@onready var sword_sound_3: AudioStreamPlayer2D = $SwordSound3
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var hitbox: Area2D = $Hitbox
 @onready var hit_collision: CollisionShape2D = $Hitbox/CollisionShape2D
@@ -77,14 +79,14 @@ func _ready() -> void:
 	await get_tree().create_timer(SMOOTH_ENABLE_TIME).timeout
 	camera.position_smoothing_enabled = true
 	
-	#cutscenes.stop()
+	cutscenes.stop()
 	#global_position = Vector2(3230, 220)
-	#CAN_CONTROL = true
-	#camera.offset.y = -40
-	#camera.zoom = Vector2(3, 3)
-	#camera.position = Vector2(0, 0)
-	#up.position = Vector2(0, -200)
-	#down.position = Vector2(0, 1080)
+	CAN_CONTROL = true
+	camera.offset.y = -40
+	camera.zoom = Vector2(3, 3)
+	camera.position = Vector2(0, 0)
+	up.position = Vector2(0, -200)
+	down.position = Vector2(0, 1080)
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -296,8 +298,8 @@ func attack() -> void:
 	elif att_state == 2:
 		is_attacking = true
 		animater.play("attack 2")
-		sword_sound.pitch_scale = rng.randf_range(0.9, 1.2)
-		sword_sound.play()
+		sword_sound_2.pitch_scale = rng.randf_range(1, 1.1)
+		sword_sound_2.play()
 		await get_tree().create_timer(0.25).timeout
 		hit_collision.disabled = false
 		await get_tree().create_timer(0.25).timeout
@@ -315,6 +317,8 @@ func attack() -> void:
 	elif att_state == 3:
 		is_attacking = true
 		animater.play("attack 3")
+		sword_sound_3.pitch_scale = rng.randf_range(1.1, 1.3)
+		sword_sound_3.play()
 		await get_tree().create_timer(0.272727).timeout
 		hit_collision.disabled = false
 		await get_tree().create_timer(0.727272).timeout

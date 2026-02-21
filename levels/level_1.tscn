@@ -1,4 +1,4 @@
-[gd_scene load_steps=193 format=3 uid="uid://kvjcgugvhw8a"]
+[gd_scene load_steps=195 format=3 uid="uid://kvjcgugvhw8a"]
 
 [ext_resource type="PackedScene" uid="uid://br5apb2urv30b" path="res://levels/ground_level_1.tscn" id="2_rus8k"]
 [ext_resource type="PackedScene" uid="uid://c5g0jfg21np50" path="res://scenes/world border.tscn" id="3_rus8k"]
@@ -33,7 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://cpmdw4e8qejuc" path="res://assets/player/male_hero-wall_jump.png" id="19_5vbbt"]
 [ext_resource type="Texture2D" uid="uid://c8hm1l86oribv" path="res://assets/player/male_hero-wall_slide.png" id="20_vsljp"]
 [ext_resource type="AudioStream" uid="uid://cxltxdaftistf" path="res://assets/Sword Sound.mp3" id="21_rx1pf"]
+[ext_resource type="AudioStream" uid="uid://bsxdnelnvalmb" path="res://assets/Sword Sound 2.mp3" id="22_dp1ib"]
 [ext_resource type="PackedScene" uid="uid://bo7cgev2cws8m" path="res://scenes/hurtbox.tscn" id="22_nhjla"]
+[ext_resource type="AudioStream" uid="uid://dpd7qss5r0ltv" path="res://assets/Sword Sound 3.mp3" id="23_5t0se"]
 [ext_resource type="PackedScene" uid="uid://d07igr3u2imto" path="res://scenes/hitbox.tscn" id="23_jpd8a"]
 
 [sub_resource type="Environment" id="Environment_5ot28"]
@@ -1468,7 +1470,7 @@ BARS = NodePath("../All UIs/PlayerDock")
 
 [node name="Animater" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_y4r1p")
-animation = &"wall jump"
+animation = &"attack 3"
 autoplay = "idle"
 
 [node name="side" type="RayCast2D" parent="Player/Animater"]
@@ -1504,6 +1506,16 @@ one_shot = true
 
 [node name="SwordSound" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("21_rx1pf")
+volume_db = 14.856
+attenuation = 0.870551
+
+[node name="SwordSound2" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("22_dp1ib")
+volume_db = 14.856
+attenuation = 0.870551
+
+[node name="SwordSound3" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("23_5t0se")
 volume_db = 14.856
 attenuation = 0.870551
 

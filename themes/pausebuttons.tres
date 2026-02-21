@@ -2,13 +2,15 @@
 
 [ext_resource type="FontFile" uid="uid://df62x3o6lbdp7" path="res://assets/monogram_font.ttf" id="1_hxref"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxref"]
-draw_center = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8t6m"]
+bg_color = Color(0, 0.701961, 0.435294, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.834614, 0.834614, 0.834614, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_bottom_left = 2
+shadow_size = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ulul"]
 bg_color = Color(0, 0.648917, 0.505866, 1)
@@ -20,23 +22,24 @@ border_color = Color(0.873298, 0.873298, 0.873298, 1)
 expand_margin_bottom = 2.0
 shadow_size = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8eoxt"]
-bg_color = Color(0.800491, 0.800491, 0.800491, 1)
-draw_center = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yaaj"]
+bg_color = Color(0, 0.784314, 0, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
+border_color = Color(1, 1, 1, 1)
+expand_margin_bottom = 2.0
+shadow_size = 10
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_color = Color(0.0885593, 0.0885601, 0.0885602, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
 Button/constants/outline_size = 5
 Button/font_sizes/font_size = 45
 Button/fonts/font = ExtResource("1_hxref")
-Button/styles/hover = SubResource("StyleBoxFlat_hxref")
+Button/styles/hover = SubResource("StyleBoxFlat_u8t6m")
 Button/styles/normal = SubResource("StyleBoxFlat_5ulul")
-Button/styles/pressed = SubResource("StyleBoxFlat_8eoxt")
+Button/styles/pressed = SubResource("StyleBoxFlat_3yaaj")
