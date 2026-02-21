@@ -21,6 +21,7 @@ extends CharacterBody2D
 @onready var attack_tutorial: RichTextLabel = $"../All UIs/Tutorials/Attack Tutorial"
 @onready var up: ColorRect = $"../All UIs/Cutscene Stuff/Up"
 @onready var down: ColorRect = $"../All UIs/Cutscene Stuff/Down"
+@onready var run_tutorial: RichTextLabel = $"../All UIs/Tutorials/Run Tutorial"
 
 @export var WALK_SPEED := 55
 @export var RUN_SPEED := 145
@@ -476,10 +477,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_run_unlock_body_entered(body: Node2D) -> void:
 	if body is Player:
 		for i in range(14):
-			attack_tutorial.visible_characters += 1
+			run_tutorial.visible_characters += 1
 			await get_tree().create_timer(0.02).timeout
 		await get_tree().create_timer(3).timeout
 		for i in range(14):
-			attack_tutorial.visible_characters -= 1
+			run_tutorial.visible_characters -= 1
 			await get_tree().create_timer(0.02).timeout
-		$"../AttackUnlock/CollisionShape2D".disabled = true
+		$"../RunUnlock/CollisionShape2D".disabled = true

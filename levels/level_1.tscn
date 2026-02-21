@@ -1823,15 +1823,12 @@ position = Vector2(-3, -2)
 
 [node name="Respawn2" parent="Respawns" instance=ExtResource("7_pa8r4")]
 position = Vector2(2076, 218)
-Number = 2
 
 [node name="Respawn3" parent="Respawns" instance=ExtResource("7_pa8r4")]
 position = Vector2(3425, 6702)
-Number = 3
 
 [node name="Respawn4" parent="Respawns" instance=ExtResource("7_pa8r4")]
 position = Vector2(5583, 6205)
-Number = 3
 
 [node name="2nd Cutscene" type="Area2D" parent="."]
 position = Vector2(3492, 555)
@@ -1862,10 +1859,10 @@ position = Vector2(6781, 6248)
 position = Vector2(0, -72)
 shape = SubResource("RectangleShape2D_5ot28")
 
-[node name="Run Unlock" type="Area2D" parent="."]
+[node name="RunUnlock" type="Area2D" parent="."]
 position = Vector2(29, 696)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Run Unlock"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RunUnlock"]
 position = Vector2(0, -72)
 shape = SubResource("RectangleShape2D_5ot28")
 
@@ -2056,7 +2053,7 @@ visible_ratio = 0.0
 [connection signal="body_entered" from="DashUnlock" to="Player" method="_on_dash_unlock_body_entered"]
 [connection signal="body_entered" from="WallUnlock" to="Player" method="_on_wall_unlock_body_entered"]
 [connection signal="body_entered" from="AttackUnlock" to="Player" method="_on_attack_unlock_body_entered"]
-[connection signal="body_entered" from="Run Unlock" to="Player" method="_on_run_unlock_body_entered"]
+[connection signal="body_entered" from="RunUnlock" to="Player" method="_on_run_unlock_body_entered"]
 
 [editable path="World"]
 [editable path="Player/Hurtbox"]

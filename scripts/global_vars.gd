@@ -11,17 +11,4 @@ extends Node
 
 var in_water: bool
 var level := 1
-
 var player_spawn := Vector2(-134, 658)
-
-
-# # Functionality Below
-
-
-var checkpoints = {}
-
-func activate_checkpoint(id):
-	checkpoints[id] = true
-
-func is_checkpoint_active(id) -> int:
-	return checkpoints.get(id, false)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cid68hgymq6g1"]
 
-[ext_resource type="Script" uid="uid://b87fmjqe6to1l" path="res://scripts/go_to_next_level.gd" id="1_opnrl"]
+[ext_resource type="Script" uid="uid://b87fmjqe6to1l" path="res://scripts/the_end.gd" id="1_opnrl"]
 [ext_resource type="FontFile" uid="uid://df62x3o6lbdp7" path="res://assets/monogram_font.ttf" id="2_gux1i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp35e"]
