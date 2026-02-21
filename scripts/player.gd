@@ -16,9 +16,9 @@ extends CharacterBody2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var hit_collision: CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var hurt_screen: CanvasLayer = $"Red Hurtscreen/Hurt Screen"
-@onready var dash_tutorial: RichTextLabel = $"Dash Tutorial"
-@onready var wall_tutorial: RichTextLabel = $"Wall Tutorial"
-@onready var attack_tutorial: RichTextLabel = $"Attack Tutorial"
+@onready var dash_tutorial: RichTextLabel = $"../All UIs/Tutorials/Dash Tutorial"
+@onready var wall_tutorial: RichTextLabel = $"../All UIs/Tutorials/Wall Tutorial"
+@onready var attack_tutorial: RichTextLabel = $"../All UIs/Tutorials/Attack Tutorial"
 @onready var up: ColorRect = $"../All UIs/Cutscene Stuff/Up"
 @onready var down: ColorRect = $"../All UIs/Cutscene Stuff/Down"
 
@@ -76,14 +76,14 @@ func _ready() -> void:
 	await get_tree().create_timer(SMOOTH_ENABLE_TIME).timeout
 	camera.position_smoothing_enabled = true
 	
-	cutscenes.stop()
-	global_position = Vector2(3230, 220)
-	CAN_CONTROL = true
-	camera.offset.y = -40
-	camera.zoom = Vector2(3, 3)
-	camera.position = Vector2(0, 0)
-	up.position = Vector2(0, -200)
-	down.position = Vector2(0, 1080)
+	#cutscenes.stop()
+	#global_position = Vector2(3230, 220)
+	#CAN_CONTROL = true
+	#camera.offset.y = -40
+	#camera.zoom = Vector2(3, 3)
+	#camera.position = Vector2(0, 0)
+	#up.position = Vector2(0, -200)
+	#down.position = Vector2(0, 1080)
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -472,3 +472,14 @@ func _on_attack_unlock_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and body.is_on_floor():
 		body.position.x -= 50
+
+func _on_run_unlock_body_entered(body: Node2D) -> void:
+	if body is Player:
+		for i in range(14):
+			attack_tutorial.visible_characters += 1
+			await get_tree().create_timer(0.02).timeout
+		await get_tree().create_timer(3).timeout
+		for i in range(14):
+			attack_tutorial.visible_characters -= 1
+			await get_tree().create_timer(0.02).timeout
+		$"../AttackUnlock/CollisionShape2D".disabled = true
