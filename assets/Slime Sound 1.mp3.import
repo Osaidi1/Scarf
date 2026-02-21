@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d3xh8divkxg7s"
+path="res://.godot/imported/Slime Sound 1.mp3-89e5f288313722c81dba178b234e5a36.mp3str"
+
+[deps]
+
+source_file="res://assets/Slime Sound 1.mp3"
+dest_files=["res://.godot/imported/Slime Sound 1.mp3-89e5f288313722c81dba178b234e5a36.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=251 format=3 uid="uid://bth78kmorbqct"]
+[gd_scene load_steps=254 format=3 uid="uid://bth78kmorbqct"]
 
 [ext_resource type="Script" uid="uid://ssweiwdmmjy2" path="res://scripts/slime.gd" id="1_2npkn"]
 [ext_resource type="Texture2D" uid="uid://bj5bcjlqam0ri" path="res://assets/slimes/slime_jump.png" id="1_n6pvg"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bb2g6xv5tks57" path="res://assets/slimes/slime_die.png" id="3_fd6lc"]
 [ext_resource type="Texture2D" uid="uid://mhjt7tspqllt" path="res://assets/slimes/slime_hit.png" id="4_gstla"]
 [ext_resource type="PackedScene" uid="uid://d07igr3u2imto" path="res://scenes/hitbox.tscn" id="4_pjw23"]
+[ext_resource type="AudioStream" uid="uid://d3xh8divkxg7s" path="res://assets/Slime Sound 1.mp3" id="8_vnioy"]
+[ext_resource type="AudioStream" uid="uid://ccfq8xacouo6i" path="res://assets/Slime Sound 2.mp3" id="9_2xjuo"]
+[ext_resource type="AudioStream" uid="uid://cg1vpkpogurcn" path="res://assets/Slime Sound 3.mp3" id="10_a02ik"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gstla"]
 atlas = ExtResource("1_n6pvg")
@@ -1968,6 +1971,15 @@ enable_node_path = NodePath("")
 libraries = {
 &"": SubResource("AnimationLibrary_0l8pv")
 }
+
+[node name="Sound 1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_vnioy")
+
+[node name="Sound 2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_2xjuo")
+
+[node name="Sound 3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_a02ik")
 
 [connection signal="body_entered" from="CheckPlayer" to="." method="player_in_range"]
 [connection signal="body_exited" from="CheckPlayer" to="." method="player_not_in_range"]
