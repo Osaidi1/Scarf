@@ -1,6 +1,6 @@
 extends Control
 
-const LEVEL_1 = preload("res://levels/level_1.tscn") as PackedScene
+const LEVEL_1 := preload("res://levels/level_1.tscn") as PackedScene
 
 @onready var new_game: Button = $"New Game"
 @onready var load_game: Button = $"Load Game"

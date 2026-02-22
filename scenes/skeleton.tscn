@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bjcnwi0wp4dnl"]
+[gd_scene load_steps=72 format=3 uid="uid://bjcnwi0wp4dnl"]
 
 [ext_resource type="Texture2D" uid="uid://5lpvwpvjf8xb" path="res://assets/skeleton/Skeleton enemy.png" id="2_txkty"]
 [ext_resource type="PackedScene" uid="uid://bo7cgev2cws8m" path="res://scenes/hurtbox.tscn" id="3_ivqcw"]
@@ -439,20 +439,57 @@ size = Vector2(11.1111, 29.1111)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txkty"]
 size = Vector2(7.77777, 5.55556)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pgwy"]
-size = Vector2(48.8889, 42.2222)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivqcw"]
 size = Vector2(293.333, 28.8889)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bnirc"]
 size = Vector2(126.667, 36.6667)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pgwy"]
+size = Vector2(48.8889, 42.2222)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssl1b"]
 size = Vector2(12, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4hcs"]
 size = Vector2(21.1111, 28.8889)
+
+[sub_resource type="Animation" id="Animation_v5wyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animater:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gstla"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animater:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.886275, 0, 0, 0.882353), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0l8pv"]
+_data = {
+&"RESET": SubResource("Animation_v5wyi"),
+&"hurt": SubResource("Animation_gstla")
+}
 
 [node name="Skeleton" type="CharacterBody2D"]
 scale = Vector2(0.9, 0.9)
@@ -464,8 +501,6 @@ script = ExtResource("7_w4hcs")
 sprite_frames = SubResource("SpriteFrames_w4hcs")
 animation = &"hurt"
 autoplay = "idle"
-frame = 4
-frame_progress = 1.0
 
 [node name="Turn" type="RayCast2D" parent="Animater"]
 position = Vector2(23.3333, 0)
@@ -479,15 +514,6 @@ shape = SubResource("RectangleShape2D_haw2w")
 position = Vector2(10.5556, 11.1111)
 shape = SubResource("RectangleShape2D_txkty")
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
-[node name="AttackRange" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2(0, -6.66667)
-shape = SubResource("RectangleShape2D_5pgwy")
-
 [node name="CheckPlayer" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPlayer"]
@@ -497,6 +523,12 @@ shape = SubResource("RectangleShape2D_ivqcw")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CheckPlayer"]
 position = Vector2(-1.05964e-06, -32.7778)
 shape = SubResource("RectangleShape2D_bnirc")
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(0, -6.66667)
+shape = SubResource("RectangleShape2D_5pgwy")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_ivqcw")]
 position = Vector2(1.11111, -1.11111)
@@ -518,12 +550,20 @@ shape = SubResource("RectangleShape2D_w4hcs")
 position = Vector2(0, -1.11111)
 scale = Vector2(3.38889, 2)
 
-[connection signal="timeout" from="Timer" to="." method="timer_end"]
-[connection signal="body_entered" from="AttackRange" to="." method="attack"]
-[connection signal="body_exited" from="AttackRange" to="." method="attack_exit"]
+[node name="hurt" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0l8pv")
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_entered" from="CheckPlayer" to="." method="player_in_range"]
 [connection signal="body_exited" from="CheckPlayer" to="." method="player_not_in_range"]
+[connection signal="body_entered" from="AttackRange" to="." method="attack"]
+[connection signal="body_exited" from="AttackRange" to="." method="attack_exit"]
 [connection signal="area_entered" from="Hitbox" to="." method="player_hurt_entered"]
+[connection signal="timeout" from="Timer" to="." method="timer_end"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

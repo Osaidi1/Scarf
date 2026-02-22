@@ -1,38 +1,61 @@
 class_name Skeleton
 extends CharacterBody2D
 
-@onready var timer: Timer = $Timer
 @onready var animater: AnimatedSprite2D = $Animater
 @onready var turn: RayCast2D = $Animater/Turn
+@onready var attack_range: Area2D = $AttackRange
+@onready var hit_collision: CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var hitbox: Area2D = $Hitbox
-@onready var hit_collision: CollisionShape2D = $Hitbox/CollisionShape2D
+@onready var collision: CollisionShape2D = $Collision
+@onready var collision_2: CollisionShape2D = $"Collision 2"
+@onready var hurt: AnimationPlayer = $hurt
+@onready var player: Player = $"../../Player"
+@onready var timer: Timer = $Timer
 
 @export var HEALTH := 100
-@export var SPEED := 50
-@export var player: CharacterBody2D
+@export var SPEED := 30
 
-var rng := RandomNumberGenerator.new()
+@export_enum("red", "orange", "yellow", "green", "blue", "peach", "gray", "pink") 
+var slime_color: String
+var KNOCKBACK: Vector2 = Vector2.ZERO
+
 var player_pos: Vector2
 
 var dir := 1
 var last_dir := dir
-var friction := 0.9
 var is_chasing := false
 var is_attacking := false
-var is_hurting := false
 var is_wandering := true
 var is_walking := true
-var is_stopped := false
+var is_hurting := false
+var is_dying := false
+var knockback_timer := 0.0
+var sound_playing := false
 
 func _ready() -> void:
 	hit_collision.disabled = true
-	random_time()
 
 func _physics_process(delta: float) -> void:
+	#Nothing if Dead
+	if is_dying: return
+	
+	#Die if no Health
+	if HEALTH <= 0:
+		die()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
+	# Knockback
+	if knockback_timer > 0.0:
+		velocity.x = KNOCKBACK.x
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			KNOCKBACK = Vector2.ZERO
+		move_and_slide()
+		return
 	
 	#Chase Logic
 	if is_chasing:
@@ -44,14 +67,12 @@ func _physics_process(delta: float) -> void:
 		
 		#Move Toward Player
 		var direction = (player_pos - position).normalized()
-		velocity.x = direction.x * SPEED * 1.5
+		if !is_attacking:
+			velocity.x = direction.x * SPEED
 		
 		#Turn while chase
-		dir = sign(direction.x)
-		
-		#No Move while Attack
-		if is_attacking:
-			velocity.x = 0
+		if direction.x != 0:
+			dir = sign(direction.x)
 	
 	#Wander Logic
 	if is_wandering:
@@ -64,9 +85,14 @@ func _physics_process(delta: float) -> void:
 		
 		#Add Velocity
 		if is_walking:
-			velocity.x = (SPEED * dir * delta) * 60
-		elif is_stopped:
-			velocity.x *= (friction * delta) * 16
+			velocity.x = SPEED * dir
+	
+	#Attack Indertia Fix
+	if is_attacking:
+		if animater.flip_h and velocity.x > 0:
+			velocity.x /= 2
+		if !animater.flip_h and velocity.x < 0:
+			velocity.x /= 2
 	
 	#Call Funcs
 	facing_dir()
@@ -79,34 +105,19 @@ func facing_dir() -> void:
 	if dir != last_dir:
 		animater.flip_h = dir < 0
 		turn.position.x *= -1
+		turn.target_position.x *= -1
 		last_dir = dir
-		hurtbox.scale.x = dir
+		attack_range.scale.x = dir
 		hitbox.scale.x = dir
-
-func random_time() -> void:
-	if is_wandering:
-		timer.wait_time = rng.randf_range(4.0, 7.0)
-		is_walking = true
-		is_stopped = false
-
-func timer_end() -> void:
-	if is_wandering:
-		is_walking = false
-		is_stopped = true
-		await get_tree().create_timer(rng.randf_range(1.0, 2.5)).timeout
-		random_time()
-		timer.start()
+		hurtbox.scale.x = dir
+		collision.position.x *= -1
 
 func anims() -> void:
-	if is_hurting:
-		animater.play("hurt")
 	if is_attacking: return
-	if is_chasing:
-		animater.play("chase walk")
+	elif is_hurting:
+		animater.play("hurt")
 	elif is_walking:
 		animater.play("walk")
-	elif is_stopped:
-		animater.play("idle")
 
 func player_in_range(body: Node2D) -> void:
 	if body is Player:
@@ -115,45 +126,58 @@ func player_in_range(body: Node2D) -> void:
 
 func player_not_in_range(body: Node2D) -> void:
 	if body is Player:
-		animater.play("idle")
 		is_chasing = false
-		velocity.x = 0
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(0.75).timeout
+		dir = -dir
 		is_wandering = true
 
 func attack(body: Node2D) -> void:
-	if body is Player:
-		is_attacking = true
-		while is_attacking:
-			await get_tree().create_timer(0.5).timeout
-			is_attacking = true
-			animater.play("attack")
-			await get_tree().create_timer(0.2).timeout
-			hit_collision.disabled = false
-			await get_tree().create_timer(0.2).timeout
-			hit_collision.disabled = true
-			await get_tree().create_timer(0.2).timeout
-			hit_collision.disabled = false
-			await get_tree().create_timer(0.2).timeout
-			hit_collision.disabled = true
-			await get_tree().create_timer(0.3).timeout
-			await get_tree().create_timer(0.5).timeout
+	if body is Player and is_attacking:
+		return
+	is_attacking = true
+	animater.play("attack")
+	await get_tree().create_timer(0.4).timeout
+	hit_collision.disabled = false
+	await get_tree().create_timer(0.25).timeout
+	hit_collision.disabled = true
+	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(0.25).timeout
+	is_attacking = false
+	while not is_on_floor() :
+		await get_tree().create_timer(0.1).timeout
 
 func attack_exit(body: Node2D) -> void:
 	if body is Player:
-		is_attacking = false
+		is_chasing = true
+
+func die() -> void:
+	is_dying = true
+	animater.play("death")
+	collision.disabled = true
+	velocity.y = 0
+	await get_tree().create_timer(1).timeout
+	queue_free()
 
 func health_set() -> void:
 	HEALTH = clamp(HEALTH, 0, 100)
 
 func health_change(diff) -> void:
 	var prev_health = HEALTH
-	print("changed")
 	HEALTH += diff
 	if prev_health > HEALTH:
 		is_hurting = true
+		hurt.play("hurt")
 		await get_tree().create_timer(0.5).timeout
 		is_hurting = false
+	health_set()
 
-func player_hurt_entered(_area: Area2D) -> void:
-	player.health_change(-20)
+func player_hurt_entered(area: Area2D) -> void:
+	if area.get_parent() is Player and player and !is_hurting:
+		player.health_change(-30)
+		var knockback_direction = (area.global_position - global_position).normalized()
+		player.apply_knockback(knockback_direction, 200, 0.4)
+
+func apply_knockback(direction_for_knock: Vector2, force: float, knockback_duration: float) -> void:
+	KNOCKBACK = direction_for_knock * force
+	KNOCKBACK.y *= 0
+	knockback_timer = knockback_duration

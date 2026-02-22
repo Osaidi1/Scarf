@@ -9,22 +9,22 @@ extends CharacterBody2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var collision: CollisionShape2D = $Collision
 @onready var hurt: AnimationPlayer = $hurt
+@onready var sound_1: AudioStreamPlayer2D = $"Sound 1"
+@onready var sound_2: AudioStreamPlayer2D = $"Sound 2"
+@onready var sound_3: AudioStreamPlayer2D = $"Sound 3"
+@onready var player: Player = $"../../Player"
 
 @export var HEALTH := 60
 @export var SPEED := 30
-@export var JUMP_VELOCITY := -250
-@export var player: CharacterBody2D
 
 @export_enum("red", "orange", "yellow", "green", "blue", "peach", "gray", "pink") 
 var slime_color: String
 var KNOCKBACK: Vector2 = Vector2.ZERO
 
-var rng := RandomNumberGenerator.new()
 var player_pos: Vector2
 
 var dir := 1
 var last_dir := dir
-var friction := 0.9
 var is_chasing := false
 var is_attacking := false
 var is_wandering := true
@@ -32,6 +32,7 @@ var is_walking := true
 var is_hurting := false
 var is_dying := false
 var knockback_timer := 0.0
+var sound_playing := false
 
 func _ready() -> void:
 	hit_collision.disabled = true
@@ -50,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Knockback
 	if knockback_timer > 0.0:
-		velocity = KNOCKBACK
+		velocity.x = KNOCKBACK.x
 		knockback_timer -= delta
 		if knockback_timer <= 0.0:
 			KNOCKBACK = Vector2.ZERO
@@ -71,7 +72,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction.x * SPEED
 		
 		#Turn while chase
-		dir = sign(direction.x)
+		if direction.x != 0:
+			dir = sign(direction.x)
 	
 	#Wander Logic
 	if is_wandering:
@@ -86,10 +88,15 @@ func _physics_process(delta: float) -> void:
 		if is_walking:
 			velocity.x = SPEED * dir
 	
+	#Attack Indertia Fix
+	if is_attacking:
+		if animater.flip_h and velocity.x > 0:
+			velocity.x /= 2
+		if !animater.flip_h and velocity.x < 0:
+			velocity.x /= 2
+	
 	#Call Funcs
 	facing_dir()
-	
-	health_set()
 	
 	anims()
 	
@@ -104,12 +111,14 @@ func facing_dir() -> void:
 		attack_range.scale.x = dir
 		hitbox.scale.x = dir
 		hurtbox.scale.x = dir
-		collision.position.x = -1
+		collision.position.x *= -1
 
 func anims() -> void:
 	if is_attacking: return
 	elif is_hurting:
 		animater.play(slime_color + " hurt")
+		if !sound_playing:
+			play_sound()
 	elif is_walking:
 		animater.play(slime_color + " walk")
 
@@ -126,18 +135,21 @@ func player_not_in_range(body: Node2D) -> void:
 		is_wandering = true
 
 func attack(body: Node2D) -> void:
-	if body is Player and !is_attacking:
-		is_attacking = true
-		animater.play(slime_color + " attack")
-		await get_tree().create_timer(0.4).timeout
-		hit_collision.disabled = false
-		await get_tree().create_timer(0.25).timeout
-		hit_collision.disabled = true
-		await get_tree().create_timer(0.35).timeout
-		await get_tree().create_timer(0.5).timeout
-		while velocity.y != 0 :
-			await get_tree().create_timer(0.1).timeout
-		is_attacking = false
+	if body is Player and is_attacking:
+		return
+	is_attacking = true
+	animater.play(slime_color + " attack")
+	if !sound_playing:
+		play_sound()
+	await get_tree().create_timer(0.4).timeout
+	hit_collision.disabled = false
+	await get_tree().create_timer(0.25).timeout
+	hit_collision.disabled = true
+	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(0.25).timeout
+	is_attacking = false
+	while not is_on_floor() :
+		await get_tree().create_timer(0.1).timeout
 
 func attack_exit(body: Node2D) -> void:
 	if body is Player:
@@ -162,6 +174,7 @@ func health_change(diff) -> void:
 		hurt.play("hurt")
 		await get_tree().create_timer(0.5).timeout
 		is_hurting = false
+	health_set()
 
 func player_hurt_entered(area: Area2D) -> void:
 	if area.get_parent() is Player and player and !is_hurting:
@@ -173,3 +186,16 @@ func apply_knockback(direction_for_knock: Vector2, force: float, knockback_durat
 	KNOCKBACK = direction_for_knock * force
 	KNOCKBACK.y *= 0
 	knockback_timer = knockback_duration
+
+func play_sound() -> void:
+	sound_playing = true
+	var sound = int(randf_range(1, 3.9))
+	match sound:
+		1:
+			sound_1.play()
+		2:
+			sound_2.play()
+		3:
+			sound_3.play()
+	await get_tree().create_timer(1).timeout
+	sound_playing = false

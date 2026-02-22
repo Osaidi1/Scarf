@@ -45,7 +45,7 @@ func _on_body_entered(body: Node2D) -> void:
 		#Bye
 		
 		final_text.play("scarf")
-		await !final_text.is_playing()
+		await get_tree().create_timer(4).timeout
 		
 		# End
 		

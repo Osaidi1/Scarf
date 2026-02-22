@@ -1463,7 +1463,7 @@ motion_scale = Vector2(0.01, 0.01)
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("BARS")]
 z_index = 1
-position = Vector2(3573, 6410)
+position = Vector2(6707, 6148)
 script = ExtResource("3_toluw")
 SMOOTH_ENABLE_TIME = 0.1
 BARS = NodePath("../All UIs/PlayerDock")
@@ -1745,14 +1745,12 @@ shape = SubResource("RectangleShape2D_nmsli")
 
 [node name="Slimes" type="Node2D" parent="."]
 
-[node name="Slime" parent="Slimes" node_paths=PackedStringArray("player") instance=ExtResource("12_aerfg")]
+[node name="Slime" parent="Slimes" instance=ExtResource("12_aerfg")]
 position = Vector2(7032, 6278)
-player = NodePath("../../Player")
 slime_color = "blue"
 
-[node name="Slime2" parent="Slimes" node_paths=PackedStringArray("player") instance=ExtResource("12_aerfg")]
+[node name="Slime2" parent="Slimes" instance=ExtResource("12_aerfg")]
 position = Vector2(7890, 5622)
-player = NodePath("../../Player")
 
 [node name="Waters" type="Node2D" parent="."]
 
@@ -1977,7 +1975,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
-text = "[b][font=\"res://assets/monogram_font.ttf\"]Press [img]assets/Q-Key.png[b][color=black][font=\"res://assets/monogram_font.ttf\"] to Dash"
+text = "[b][font=\"res://assets/monogram_font.ttf\"]Press [img]assets/Q-Key.png[b][font=\"res://assets/monogram_font.ttf\"] to Dash"
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters = 0

@@ -37,8 +37,8 @@ extends CharacterBody2D
 @export var BARS: CanvasLayer
 
 enum attack_state {Att1, Att2, Att3}
-var rng = RandomNumberGenerator.new()
-var KNOCKBACK : Vector2 = Vector2.ZERO
+var rng := RandomNumberGenerator.new()
+var KNOCKBACK: Vector2 = Vector2.ZERO
 
 var speed: int
 var direction: float
@@ -80,6 +80,7 @@ func _ready() -> void:
 	camera.position_smoothing_enabled = true
 	
 	cutscenes.stop()
+	global_position = Vector2(6700, 6150)
 	#global_position = Vector2(3230, 220)
 	CAN_CONTROL = true
 	camera.offset.y = -40

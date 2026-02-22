@@ -1910,7 +1910,7 @@ slime_color = "orange"
 [node name="Animater" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_ap0me")
-animation = &"pink attack"
+animation = &"blue hurt"
 
 [node name="Turn" type="RayCast2D" parent="Animater"]
 position = Vector2(18, 4)
@@ -1974,12 +1974,16 @@ libraries = {
 
 [node name="Sound 1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_vnioy")
+volume_db = -5.0
+autoplay = true
 
 [node name="Sound 2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_2xjuo")
+volume_db = -5.0
 
 [node name="Sound 3" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_a02ik")
+volume_db = -5.0
 
 [connection signal="body_entered" from="CheckPlayer" to="." method="player_in_range"]
 [connection signal="body_exited" from="CheckPlayer" to="." method="player_not_in_range"]

@@ -12,7 +12,7 @@ var is_regening := false
 var attack_stamina_taken := false
 var dash_stamina_taken := false
 
-func health_change(new_health):
+func health_change(new_health) -> void:
 	health_bar.value = new_health
 	await get_tree().create_timer(0.5).timeout
 	while health_backlay.value > health_bar.value:
