@@ -16,8 +16,6 @@ extends CharacterBody2D
 @export var HEALTH := 100
 @export var SPEED := 30
 
-@export_enum("red", "orange", "yellow", "green", "blue", "peach", "gray", "pink") 
-var slime_color: String
 var KNOCKBACK: Vector2 = Vector2.ZERO
 
 var player_pos: Vector2
@@ -94,6 +92,9 @@ func _physics_process(delta: float) -> void:
 		if !animater.flip_h and velocity.x < 0:
 			velocity.x /= 2
 	
+	if is_attacking:
+		velocity.x = 0
+	
 	#Call Funcs
 	facing_dir()
 	
@@ -111,13 +112,17 @@ func facing_dir() -> void:
 		hitbox.scale.x = dir
 		hurtbox.scale.x = dir
 		collision.position.x *= -1
+		collision_2.position.x *= -1
 
 func anims() -> void:
 	if is_attacking: return
 	elif is_hurting:
 		animater.play("hurt")
 	elif is_walking:
-		animater.play("walk")
+		if is_chasing:
+			animater.play("chase walk")
+		else:
+			animater.play("walk")
 
 func player_in_range(body: Node2D) -> void:
 	if body is Player:
@@ -136,12 +141,15 @@ func attack(body: Node2D) -> void:
 		return
 	is_attacking = true
 	animater.play("attack")
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.18).timeout
 	hit_collision.disabled = false
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.18).timeout
 	hit_collision.disabled = true
-	await get_tree().create_timer(0.35).timeout
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.18).timeout
+	hit_collision.disabled = false
+	await get_tree().create_timer(0.18).timeout
+	hit_collision.disabled = true
+	await get_tree().create_timer(0.27).timeout
 	is_attacking = false
 	while not is_on_floor() :
 		await get_tree().create_timer(0.1).timeout
@@ -154,6 +162,7 @@ func die() -> void:
 	is_dying = true
 	animater.play("death")
 	collision.disabled = true
+	collision_2.disabled = true
 	velocity.y = 0
 	await get_tree().create_timer(1).timeout
 	queue_free()
@@ -173,7 +182,7 @@ func health_change(diff) -> void:
 
 func player_hurt_entered(area: Area2D) -> void:
 	if area.get_parent() is Player and player and !is_hurting:
-		player.health_change(-30)
+		player.health_change(-20)
 		var knockback_direction = (area.global_position - global_position).normalized()
 		player.apply_knockback(knockback_direction, 200, 0.4)
 

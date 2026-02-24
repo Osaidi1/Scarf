@@ -1910,7 +1910,7 @@ slime_color = "orange"
 [node name="Animater" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_ap0me")
-animation = &"blue hurt"
+animation = &"blue die"
 
 [node name="Turn" type="RayCast2D" parent="Animater"]
 position = Vector2(18, 4)
