@@ -1,8 +1,8 @@
 extends Node
 
-@export var dash_unlocked := false
+@export var dash_unlocked := true
 @export var dash_stamina := true
-@export var wall_slide_jump_unlocked := false
+@export var wall_slide_jump_unlocked := true
 @export var wall_slide_jump_stamina := true
 @export var attack_unlocked := false
 @export var attack_2_unlocked := true

@@ -80,7 +80,7 @@ func _ready() -> void:
 	camera.position_smoothing_enabled = true
 	
 	cutscenes.stop()
-	global_position = Vector2(6700, 6150)
+	global_position = Vector2(7750, 5550)
 	#global_position = Vector2(3230, 220)
 	CAN_CONTROL = true
 	camera.offset.y = -40
