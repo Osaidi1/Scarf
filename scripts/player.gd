@@ -80,7 +80,7 @@ func _ready() -> void:
 	camera.position_smoothing_enabled = true
 	
 	cutscenes.stop()
-	global_position = Vector2(7750, 5550)
+	global_position = Vector2(10000, 7050)
 	#global_position = Vector2(3230, 220)
 	CAN_CONTROL = true
 	camera.offset.y = -40
@@ -88,7 +88,6 @@ func _ready() -> void:
 	camera.position = Vector2(0, 0)
 	up.position = Vector2(0, -200)
 	down.position = Vector2(0, 1080)
-	
 
 func _unhandled_input(event: InputEvent) -> void:
 	#Can't Control
@@ -155,6 +154,11 @@ func _physics_process(delta: float) -> void:
 	#Falling
 	if !Input.is_action_just_pressed("jump") and velocity.y > 0:
 		is_falling = true
+	
+	#Trap Damage
+	if vars.spike_hurt:
+		health_change(-50)
+		vars.spike_hurt = false
 	
 	#Jump Buffer
 	if Input.is_action_pressed("jump"):

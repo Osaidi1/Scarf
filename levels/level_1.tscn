@@ -1,4 +1,4 @@
-[gd_scene load_steps=198 format=4 uid="uid://kvjcgugvhw8a"]
+[gd_scene load_steps=199 format=4 uid="uid://kvjcgugvhw8a"]
 
 [ext_resource type="PackedScene" uid="uid://br5apb2urv30b" path="res://levels/ground_level_1.tscn" id="2_rus8k"]
 [ext_resource type="PackedScene" uid="uid://c5g0jfg21np50" path="res://scenes/world border.tscn" id="3_rus8k"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://bo7cgev2cws8m" path="res://scenes/hurtbox.tscn" id="22_nhjla"]
 [ext_resource type="AudioStream" uid="uid://dpd7qss5r0ltv" path="res://assets/Sword Sound 3.mp3" id="23_5t0se"]
 [ext_resource type="PackedScene" uid="uid://d07igr3u2imto" path="res://scenes/hitbox.tscn" id="23_jpd8a"]
+[ext_resource type="PackedScene" uid="uid://h4bopoqawh8n" path="res://scenes/ground_trap.tscn" id="26_gtrna"]
 [ext_resource type="PackedScene" uid="uid://bjcnwi0wp4dnl" path="res://scenes/skeleton.tscn" id="30_tqj1w"]
 
 [sub_resource type="Environment" id="Environment_5ot28"]
@@ -1681,6 +1682,26 @@ z_index = -1
 position = Vector2(5521, 6588)
 rotation = 1.5708
 
+[node name="Ground Trap" parent="Spikes" instance=ExtResource("26_gtrna")]
+z_index = -1
+position = Vector2(11362, 7198)
+
+[node name="Ground Trap2" parent="Spikes" instance=ExtResource("26_gtrna")]
+z_index = -1
+position = Vector2(11694, 7198)
+
+[node name="Ground Trap3" parent="Spikes" instance=ExtResource("26_gtrna")]
+z_index = -1
+position = Vector2(11934, 7198)
+
+[node name="Ground Trap4" parent="Spikes" instance=ExtResource("26_gtrna")]
+z_index = -1
+position = Vector2(13220, 7199)
+
+[node name="Ground Trap5" parent="Spikes" instance=ExtResource("26_gtrna")]
+z_index = -1
+position = Vector2(14305, 7246)
+
 [node name="Barriers" type="Node2D" parent="."]
 position = Vector2(-337, 545)
 
@@ -1848,6 +1869,14 @@ position = Vector2(11028, 7216)
 
 [node name="Skeleton5" parent="Enemies" instance=ExtResource("30_tqj1w")]
 position = Vector2(13639, 7201)
+
+[node name="Slime5" parent="Enemies" instance=ExtResource("12_aerfg")]
+position = Vector2(12687, 7117)
+slime_color = "blue"
+
+[node name="Slime6" parent="Enemies" instance=ExtResource("12_aerfg")]
+position = Vector2(14527, 7194)
+slime_color = "peach"
 
 [node name="Waters" type="Node2D" parent="."]
 
