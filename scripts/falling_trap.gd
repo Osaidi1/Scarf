@@ -25,10 +25,8 @@ func _physics_process(delta: float) -> void:
 func _on_detector_body_entered(body: Node2D) -> void:
 	if body is Player:
 		animation_player.play("shakeandfall")
-		print("here")
 
 func fall():
-	print("here")
 	current_speed = speed
 
 func destroy():

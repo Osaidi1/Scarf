@@ -112,6 +112,7 @@ func facing_dir() -> void:
 		hitbox.scale.x = dir
 		hurtbox.scale.x = dir
 		collision.position.x *= -1
+		position.x += 10 * dir
 
 func anims() -> void:
 	if is_attacking: return

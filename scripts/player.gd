@@ -79,14 +79,14 @@ func _ready() -> void:
 	await get_tree().create_timer(SMOOTH_ENABLE_TIME).timeout
 	camera.position_smoothing_enabled = true
 	
-	#cutscenes.stop()
-	#global_position = Vector2(10000, 7050)
-	#CAN_CONTROL = true
-	#camera.offset.y = -40
-	#camera.zoom = Vector2(3, 3)
-	#camera.position = Vector2(0, 0)
-	#up.position = Vector2(0, -200)
-	#down.position = Vector2(0, 1080)
+	cutscenes.stop()
+	global_position = Vector2(10000, 7050)
+	CAN_CONTROL = true
+	camera.offset.y = -40
+	camera.zoom = Vector2(3, 3)
+	camera.position = Vector2(0, 0)
+	up.position = Vector2(0, -200)
+	down.position = Vector2(0, 1080)
 
 func _unhandled_input(event: InputEvent) -> void:
 	#Can't Control
