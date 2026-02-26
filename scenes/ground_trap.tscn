@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://h4bopoqawh8n"]
+[gd_scene load_steps=8 format=3 uid="uid://h4bopoqawh8n"]
 
 [ext_resource type="Script" uid="uid://bujkyf8iwsaho" path="res://scripts/ground_trap.gd" id="1_papq6"]
 [ext_resource type="Texture2D" uid="uid://fmrl3mkcqiu7" path="res://assets/spikes.png" id="2_papq6"]
+[ext_resource type="AudioStream" uid="uid://dyaqs7wngvaca" path="res://assets/Spike sound.mp3" id="3_7cd8j"]
 
 [sub_resource type="Animation" id="Animation_papq6"]
 length = 0.001
@@ -70,6 +71,8 @@ position = Vector2(-0.5, -27)
 shape = SubResource("RectangleShape2D_x6pnn")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7cd8j")
+volume_db = 9.231
 
 [connection signal="body_entered" from="hurt/hurt" to="." method="_on_hurt_body_entered"]
 [connection signal="body_entered" from="detector" to="." method="_on_detector_body_entered"]

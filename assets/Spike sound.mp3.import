@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dyaqs7wngvaca"
+path="res://.godot/imported/Spike sound.mp3-4588be8a44dc3cee33e36b732f265f70.mp3str"
+
+[deps]
+
+source_file="res://assets/Spike sound.mp3"
+dest_files=["res://.godot/imported/Spike sound.mp3-4588be8a44dc3cee33e36b732f265f70.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

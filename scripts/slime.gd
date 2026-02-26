@@ -20,6 +20,7 @@ extends CharacterBody2D
 @export_enum("red", "orange", "yellow", "green", "blue", "peach", "gray", "pink") 
 var slime_color: String
 var KNOCKBACK: Vector2 = Vector2.ZERO
+var rng := RandomNumberGenerator.new()
 
 var player_pos: Vector2
 
@@ -189,8 +190,9 @@ func apply_knockback(direction_for_knock: Vector2, force: float, knockback_durat
 	knockback_timer = knockback_duration
 
 func play_sound() -> void:
+	rng.randomize()
 	sound_playing = true
-	var sound = int(randf_range(1, 3.9))
+	var sound := rng.randi_range(1, 3)
 	match sound:
 		1:
 			sound_1.play()

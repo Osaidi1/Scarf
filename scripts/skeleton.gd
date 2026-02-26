@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var hurt: AnimationPlayer = $hurt
 @onready var player: Player = $"../../Player"
 @onready var timer: Timer = $Timer
+@onready var sound: AudioStreamPlayer2D = $Sound
 
 @export var HEALTH := 100
 @export var SPEED := 30
@@ -32,6 +33,7 @@ var knockback_timer := 0.0
 var sound_playing := false
 
 func _ready() -> void:
+	sound.playing = true
 	hit_collision.disabled = true
 
 func _physics_process(delta: float) -> void:

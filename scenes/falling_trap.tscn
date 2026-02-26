@@ -129,8 +129,6 @@ position = Vector2(0, 120)
 [node name="collision" type="CollisionShape2D" parent="detector"]
 shape = SubResource("RectangleShape2D_x6pnn")
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="."]
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 14
 speed_scale = 0.05

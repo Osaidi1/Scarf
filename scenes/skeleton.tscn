@@ -1,8 +1,9 @@
-[gd_scene load_steps=72 format=3 uid="uid://bjcnwi0wp4dnl"]
+[gd_scene load_steps=73 format=3 uid="uid://bjcnwi0wp4dnl"]
 
 [ext_resource type="Texture2D" uid="uid://5lpvwpvjf8xb" path="res://assets/skeleton/Skeleton enemy.png" id="2_txkty"]
 [ext_resource type="PackedScene" uid="uid://bo7cgev2cws8m" path="res://scenes/hurtbox.tscn" id="3_ivqcw"]
 [ext_resource type="PackedScene" uid="uid://d07igr3u2imto" path="res://scenes/hitbox.tscn" id="4_bnirc"]
+[ext_resource type="AudioStream" uid="uid://cy5dk5kuroeyb" path="res://assets/Skeleton sound.mp3" id="5_5pgwy"]
 [ext_resource type="Script" uid="uid://bqy5hmyv816bx" path="res://scripts/skeleton.gd" id="7_w4hcs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ssl1b"]
@@ -547,10 +548,6 @@ collision_mask = 64
 position = Vector2(18.8889, -3.33333)
 shape = SubResource("RectangleShape2D_w4hcs")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(0, -1.11111)
-scale = Vector2(3.38889, 2)
-
 [node name="hurt" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_0l8pv")
@@ -558,6 +555,12 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5pgwy")
+volume_db = 24.0
+autoplay = true
+max_distance = 100.0
 
 [connection signal="body_entered" from="CheckPlayer" to="." method="player_in_range"]
 [connection signal="body_exited" from="CheckPlayer" to="." method="player_not_in_range"]
