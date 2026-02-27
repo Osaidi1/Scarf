@@ -9,8 +9,8 @@ func _ready() -> void:
 	animater.play("RESET")
 	sound.volume_db = 0
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause") or vars.pause:
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("pause") or vars.pause:
 		if get_tree().paused:
 			resume()
 		else:
