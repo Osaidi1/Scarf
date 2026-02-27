@@ -14,4 +14,6 @@ var in_water: bool
 var level := 1
 var player_spawn := Vector2(-134, 658)
 var spike_hurt: bool
-var on_mobil := false
+var on_mobil := true
+var pause := false
+var is_mobile_running: bool

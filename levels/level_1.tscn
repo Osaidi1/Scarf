@@ -40,231 +40,21 @@
 [ext_resource type="PackedScene" uid="uid://d07igr3u2imto" path="res://scenes/hitbox.tscn" id="23_jpd8a"]
 [ext_resource type="PackedScene" uid="uid://h4bopoqawh8n" path="res://scenes/ground_trap.tscn" id="26_gtrna"]
 [ext_resource type="PackedScene" uid="uid://bjcnwi0wp4dnl" path="res://scenes/skeleton.tscn" id="30_tqj1w"]
+[ext_resource type="Script" uid="uid://dnwx7v25of7yh" path="res://scripts/mobile_controls.gd" id="41_rx1pf"]
+[ext_resource type="Texture2D" uid="uid://ci43g4ij0el0q" path="res://assets/mobile-controls/left.png" id="42_nhjla"]
+[ext_resource type="Texture2D" uid="uid://t0p6r0j48lok" path="res://assets/mobile-controls/right.png" id="43_jpd8a"]
+[ext_resource type="Texture2D" uid="uid://dc7gpd0pie5kr" path="res://assets/mobile-controls/circle.png" id="44_lodav"]
+[ext_resource type="Texture2D" uid="uid://cltaufefsd7gv" path="res://assets/mobile-controls/circle_outline.png" id="45_lieeb"]
+[ext_resource type="Texture2D" uid="uid://dn3duoq6tii18" path="res://assets/mobile-controls/color_cross.png" id="46_vgs4h"]
+[ext_resource type="Texture2D" uid="uid://3527qwbnbjlx" path="res://assets/mobile-controls/cross_outline.png" id="47_he3br"]
+[ext_resource type="Texture2D" uid="uid://ca760xcnvwgpn" path="res://assets/mobile-controls/square.png" id="48_pqv1t"]
+[ext_resource type="Texture2D" uid="uid://ho8qtkv18s68" path="res://assets/mobile-controls/square_outline.png" id="49_t8qbq"]
+[ext_resource type="Texture2D" uid="uid://3rplw5wy8qpp" path="res://assets/mobile-controls/triangle.png" id="50_ax4go"]
+[ext_resource type="Texture2D" uid="uid://8srpufjtrq3u" path="res://assets/mobile-controls/triangle_outline.png" id="51_1s1h1"]
+[ext_resource type="Texture2D" uid="uid://cix54q3tdr75x" path="res://assets/mobile-controls/settings.png" id="52_7pipe"]
+[ext_resource type="Texture2D" uid="uid://r2r0jo7g7c6k" path="res://assets/mobile-controls/settings_outline.png" id="53_aptjo"]
 
 [sub_resource type="Environment" id="Environment_5ot28"]
-
-[sub_resource type="Animation" id="Animation_aerfg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player/Camera:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -40)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Player/Camera:zoom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3, 3)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("All UIs/Cutscene Stuff/Up:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -200)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("All UIs/Cutscene Stuff/Down:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 1080)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Player:CAN_CONTROL")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("All UIs/Cutscene Stuff/1:visible_characters")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("All UIs/Cutscene Stuff/2:visible_characters")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Player/Animater:flip_h")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Player/Camera:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xapae"]
-resource_name = "RESET_mobil"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player/Camera:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -25)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Player/Camera:zoom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 2)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("All UIs/Cutscene Stuff/Up:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -200)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("All UIs/Cutscene Stuff/Down:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 1080)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Player:CAN_CONTROL")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("All UIs/Cutscene Stuff/1:visible_characters")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("All UIs/Cutscene Stuff/2:visible_characters")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Player/Animater:flip_h")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Player/Camera:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_bswci"]
 resource_name = "intro"
@@ -600,10 +390,22 @@ tracks/8/path = NodePath("Player/Camera:zoom")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 4.0333333, 4.43333),
+"times": PackedFloat32Array(0, 4.0666666, 4.43333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(4, 4), Vector2(4, 4), Vector2(2, 2)]
+"values": [Vector2(7, 7), Vector2(7, 7), Vector2(4, 4)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("All UIs/Mobile Controls/Buttons:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 4, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xv8d5"]
@@ -631,7 +433,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.033333335, 14.0333, 16),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(8, 8), Vector2(8, 8), Vector2(2, 2)]
+"values": [Vector2(8, 8), Vector2(8, 8), Vector2(4, 4)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -705,15 +507,263 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("All UIs/Mobile Controls/Buttons:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 14, 16),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_aerfg"]
+resource_name = "reset"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Camera:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/Camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("All UIs/Cutscene Stuff/Up:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -200)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("All UIs/Cutscene Stuff/Down:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Player:CAN_CONTROL")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("All UIs/Cutscene Stuff/1:visible_characters")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("All UIs/Cutscene Stuff/2:visible_characters")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Player/Animater:flip_h")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Player/Camera:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("All UIs/Mobile Controls/Buttons:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xapae"]
+resource_name = "reset_mobil"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Camera:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/Camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("All UIs/Cutscene Stuff/Up:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -200)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("All UIs/Cutscene Stuff/Down:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Player:CAN_CONTROL")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("All UIs/Cutscene Stuff/1:visible_characters")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("All UIs/Cutscene Stuff/2:visible_characters")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Player/Animater:flip_h")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Player/Camera:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rus8k"]
 _data = {
-&"RESET": SubResource("Animation_aerfg"),
-&"RESET_mobil": SubResource("Animation_xapae"),
 &"intro": SubResource("Animation_bswci"),
 &"intro2": SubResource("Animation_nmsli"),
 &"intro2_mobil": SubResource("Animation_r0nt2"),
-&"intro_mobil": SubResource("Animation_xv8d5")
+&"intro_mobil": SubResource("Animation_xv8d5"),
+&"reset": SubResource("Animation_aerfg"),
+&"reset_mobil": SubResource("Animation_xapae")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5jhy"]
@@ -1839,8 +1889,8 @@ target_position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_d2wvv")
 
 [node name="Camera" type="Camera2D" parent="Player" unique_id=1893716287]
-offset = Vector2(0, -40)
-zoom = Vector2(3, 3)
+offset = Vector2(0, -25)
+zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_speed = 3.0
 
@@ -2569,6 +2619,58 @@ vertical_alignment = 1
 visible_characters = 0
 visible_ratio = 0.0
 
+[node name="Mobile Controls" type="CanvasLayer" parent="All UIs" unique_id=241152792]
+script = ExtResource("41_rx1pf")
+
+[node name="Buttons" type="Control" parent="All UIs/Mobile Controls" unique_id=924365507]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="TouchScreenButton" parent="All UIs/Mobile Controls/Buttons" unique_id=752366997]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(58.000004, 875)
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("42_nhjla")
+texture_pressed = ExtResource("42_nhjla")
+
+[node name="Right" type="TouchScreenButton" parent="All UIs/Mobile Controls/Buttons" unique_id=1293787630]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(288, 877)
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("43_jpd8a")
+texture_pressed = ExtResource("43_jpd8a")
+
+[node name="Jump" type="TouchScreenButton" parent="All UIs/Mobile Controls/Buttons" unique_id=1684879396]
+position = Vector2(1755, 834)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("44_lodav")
+texture_pressed = ExtResource("45_lieeb")
+
+[node name="Run" type="TouchScreenButton" parent="All UIs/Mobile Controls/Buttons" unique_id=768526713]
+position = Vector2(1653, 933)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("46_vgs4h")
+texture_pressed = ExtResource("47_he3br")
+
+[node name="Dash" type="TouchScreenButton" parent="All UIs/Mobile Controls/Buttons" unique_id=1703009563]
+position = Vector2(1547, 835)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("48_pqv1t")
+texture_pressed = ExtResource("49_t8qbq")
+
+[node name="Attack" type="TouchScreenButton" parent="All UIs/Mobile Controls/Buttons" unique_id=387934764]
+position = Vector2(1653, 726)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("50_ax4go")
+texture_pressed = ExtResource("51_1s1h1")
+
+[node name="Pause" type="TouchScreenButton" parent="All UIs/Mobile Controls/Buttons" unique_id=509906046]
+position = Vector2(1772, -12)
+texture_normal = ExtResource("52_7pipe")
+texture_pressed = ExtResource("53_aptjo")
+
 [connection signal="frame_changed" from="Player/Animater" to="Player" method="_on_animater_frame_changed"]
 [connection signal="timeout" from="Player/cooldown" to="Player" method="cooldown_end"]
 [connection signal="timeout" from="Player/combo" to="Player" method="combo_end"]
@@ -2580,6 +2682,14 @@ visible_ratio = 0.0
 [connection signal="body_entered" from="WallUnlock" to="Player" method="_on_wall_unlock_body_entered"]
 [connection signal="body_entered" from="AttackUnlock" to="Player" method="_on_attack_unlock_body_entered"]
 [connection signal="body_entered" from="RunUnlock" to="Player" method="_on_run_unlock_body_entered"]
+[connection signal="pressed" from="All UIs/Mobile Controls/Buttons/Left" to="Player" method="_on_left_pressed"]
+[connection signal="pressed" from="All UIs/Mobile Controls/Buttons/Right" to="Player" method="_on_right_pressed"]
+[connection signal="pressed" from="All UIs/Mobile Controls/Buttons/Jump" to="Player" method="_on_jump_pressed"]
+[connection signal="pressed" from="All UIs/Mobile Controls/Buttons/Run" to="Player" method="_on_run_pressed"]
+[connection signal="released" from="All UIs/Mobile Controls/Buttons/Run" to="Player" method="_on_run_released"]
+[connection signal="released" from="All UIs/Mobile Controls/Buttons/Dash" to="Player" method="_on_dash_released"]
+[connection signal="released" from="All UIs/Mobile Controls/Buttons/Attack" to="Player" method="_on_attack_released"]
+[connection signal="released" from="All UIs/Mobile Controls/Buttons/Pause" to="Player" method="_on_pause_released"]
 
 [editable path="World"]
 [editable path="Player/Hurtbox"]

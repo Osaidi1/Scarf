@@ -65,12 +65,12 @@ var att_state := 1
 var last_delta := 0.0
 var can_attack := true
 
-
 func _ready() -> void:
-	if OS.has_feature("mobile"):
-		vars.on_mobil = true
-	else:
-		vars.on_mobil = false
+	#if OS.has_feature("mobile"):
+	#	vars.on_mobil = true
+	#else:
+	#	vars.on_mobil = false
+	speed = WALK_SPEED
 	camera.position_smoothing_enabled = false
 	transition.to_normal()
 	global_position = vars.player_spawn
@@ -81,12 +81,12 @@ func _ready() -> void:
 			cutscenes.play("intro")
 	else:
 		if vars.on_mobil:
-			cutscenes.play("RESET_mobil")
+			cutscenes.play("reset_mobil")
 		else:
-			cutscenes.play("RESET")
+			cutscenes.play("reset")
 	hit_collision.disabled = true
 	is_dying = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	await get_tree().create_timer(SMOOTH_ENABLE_TIME).timeout
 	camera.position_smoothing_enabled = true
 	
@@ -241,6 +241,7 @@ func _physics_process(delta: float) -> void:
 		coyote.stop()
 
 func speed_set() -> void:
+	if vars.on_mobil: return
 	if Input.is_action_pressed("run"):
 		speed = RUN_SPEED
 	else:
@@ -506,3 +507,33 @@ func _on_run_unlock_body_entered(body: Node2D) -> void:
 			run_tutorial.visible_characters -= 1
 			await get_tree().create_timer(0.02).timeout
 		$"../RunUnlock/CollisionShape2D".disabled = true
+
+func _on_left_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_right_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_jump_pressed() -> void:
+	if is_on_floor() or !coyote.is_stopped() or is_in_wall:
+		if !is_attacking and !is_dying and !is_hurting and !is_jumping and BARS.stamina_bar.value > 5:
+			jump()
+
+func _on_dash_released() -> void:
+	if !is_attacking and !is_dying and !is_hurting and !is_in_wall and !is_dashing and vars.dash_unlocked and BARS.stamina_bar.value > 25:
+		dash()
+
+func _on_attack_released() -> void:
+	if !is_jumping and !is_falling and !is_dying and !is_hurting and !is_in_wall and can_attack and vars.attack_unlocked and BARS.stamina_bar.value > 20:
+		attack()
+
+func _on_pause_released() -> void:
+	vars.pause = true
+
+func _on_run_pressed() -> void:
+	vars.is_mobile_running = true
+	speed = RUN_SPEED
+
+func _on_run_released() -> void:
+	vars.is_mobile_running = true
+	speed = WALK_SPEED

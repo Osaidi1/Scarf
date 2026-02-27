@@ -10,11 +10,12 @@ func _ready() -> void:
 	sound.volume_db = 0
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") or vars.pause:
 		if get_tree().paused:
 			resume()
 		else:
 			pause()
+			vars.pause = false
 
 func resume() -> void:
 	get_tree().paused = false
