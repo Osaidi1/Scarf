@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 		stamina_regen_wait.start()
 		regen_waited = true
 	if is_regening:
-		stamina_bar.value += 15 * delta
+		stamina_bar.value += 25 * delta
 		stamina_bar.value = clamp(stamina_bar.value, 0, 100)
 		if stamina_bar.value >= 100:
 			is_regening = false

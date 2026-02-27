@@ -9,7 +9,9 @@ extends Node
 @export var attack_3_unlocked := true
 @export var attack_stamina := true
 
+var cut_played := false
 var in_water: bool
 var level := 1
 var player_spawn := Vector2(-134, 658)
 var spike_hurt: bool
+var on_mobil := false

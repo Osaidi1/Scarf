@@ -1,16 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwkxij0pplxsx"]
+[gd_scene format=3 uid="uid://bwkxij0pplxsx"]
 
 [ext_resource type="Texture2D" uid="uid://fmrl3mkcqiu7" path="res://assets/spikes.png" id="1_5pg7g"]
 [ext_resource type="Script" uid="uid://dc8brfv4khbaf" path="res://scripts/spikes.gd" id="2_xbcdo"]
 
-[node name="Spikes" type="Sprite2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xbcdo"]
+light_mode = 1
+
+[node name="Spikes" type="Sprite2D" unique_id=2097870187]
+modulate = Color(0.996888, 0, 0.12843919, 1)
+material = SubResource("CanvasItemMaterial_xbcdo")
 texture = ExtResource("1_5pg7g")
 script = ExtResource("2_xbcdo")
 
-[node name="Danger" type="Area2D" parent="."]
+[node name="Danger" type="Area2D" parent="." unique_id=1506751963]
 position = Vector2(-3.83997, 22.0444)
 
-[node name="Collision" type="CollisionPolygon2D" parent="Danger"]
+[node name="Collision" type="CollisionPolygon2D" parent="Danger" unique_id=193987002]
+visible = false
 polygon = PackedVector2Array(1.83997, 9.95559, -0.160027, 0.955585, -0.160027, -7.04441, -0.160027, -46.0444, 2.83997, -52.0444, 5.83997, -53.0444, 7.83997, -53.0444, 7.83997, 9.95559)
 
 [connection signal="body_entered" from="Danger" to="." method="_on_danger_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://bjcnwi0wp4dnl"]
+[gd_scene format=3 uid="uid://bjcnwi0wp4dnl"]
 
 [ext_resource type="Texture2D" uid="uid://5lpvwpvjf8xb" path="res://assets/skeleton/Skeleton enemy.png" id="2_txkty"]
 [ext_resource type="PackedScene" uid="uid://bo7cgev2cws8m" path="res://scenes/hurtbox.tscn" id="3_ivqcw"]
@@ -492,55 +492,56 @@ _data = {
 &"hurt": SubResource("Animation_gstla")
 }
 
-[node name="Skeleton" type="CharacterBody2D"]
+[node name="Skeleton" type="CharacterBody2D" unique_id=743839388]
 scale = Vector2(1.1, 1.1)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("7_w4hcs")
 SPEED = 50
 
-[node name="Animater" type="AnimatedSprite2D" parent="."]
+[node name="Animater" type="AnimatedSprite2D" parent="." unique_id=1025954154]
 sprite_frames = SubResource("SpriteFrames_w4hcs")
 animation = &"attack"
 autoplay = "idle"
 
-[node name="Turn" type="RayCast2D" parent="Animater"]
+[node name="Turn" type="RayCast2D" parent="Animater" unique_id=20806562]
 position = Vector2(23.3333, 0)
 target_position = Vector2(0, 13)
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2129213444]
 position = Vector2(1.32455e-07, 0.111111)
 shape = SubResource("RectangleShape2D_haw2w")
 
-[node name="Collision 2" type="CollisionShape2D" parent="."]
+[node name="Collision 2" type="CollisionShape2D" parent="." unique_id=1985819485]
 position = Vector2(10.5556, 11.1111)
 shape = SubResource("RectangleShape2D_txkty")
 
-[node name="CheckPlayer" type="Area2D" parent="."]
+[node name="CheckPlayer" type="Area2D" parent="." unique_id=1639868934]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPlayer"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPlayer" unique_id=756039597]
 position = Vector2(-3.70873e-06, 5.29819e-07)
 shape = SubResource("RectangleShape2D_ivqcw")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CheckPlayer"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CheckPlayer" unique_id=699611905]
 position = Vector2(-1.05964e-06, -32.7778)
 shape = SubResource("RectangleShape2D_bnirc")
 
-[node name="AttackRange" type="Area2D" parent="."]
+[node name="AttackRange" type="Area2D" parent="." unique_id=1075228361]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=565737488]
 position = Vector2(0, -6.66667)
 shape = SubResource("RectangleShape2D_5pgwy")
 
-[node name="Hurtbox" parent="." instance=ExtResource("3_ivqcw")]
+[node name="Hurtbox" parent="." unique_id=268129155 instance=ExtResource("3_ivqcw")]
 position = Vector2(1.11111, -1.11111)
+rotation = 0.01863962
 collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_ssl1b")
 
-[node name="Hitbox" parent="." instance=ExtResource("4_bnirc")]
+[node name="Hitbox" parent="." unique_id=1042535249 instance=ExtResource("4_bnirc")]
 collision_layer = 32
 collision_mask = 64
 
@@ -548,15 +549,13 @@ collision_mask = 64
 position = Vector2(18.8889, -3.33333)
 shape = SubResource("RectangleShape2D_w4hcs")
 
-[node name="hurt" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0l8pv")
-}
+[node name="hurt" type="AnimationPlayer" parent="." unique_id=497623096]
+libraries/ = SubResource("AnimationLibrary_0l8pv")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1139156553]
 autostart = true
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=1889983484]
 stream = ExtResource("5_5pgwy")
 volume_db = 24.0
 autoplay = true

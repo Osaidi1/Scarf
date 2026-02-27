@@ -65,14 +65,25 @@ var att_state := 1
 var last_delta := 0.0
 var can_attack := true
 
+
 func _ready() -> void:
+	if OS.has_feature("mobile"):
+		vars.on_mobil = true
+	else:
+		vars.on_mobil = false
 	camera.position_smoothing_enabled = false
 	transition.to_normal()
 	global_position = vars.player_spawn
-	if vars.player_spawn == Vector2(-134, 658):
-		cutscenes.play("intro")
+	if vars.player_spawn == Vector2(-134, 658) and !vars.cut_played:
+		if vars.on_mobil:
+			cutscenes.play("intro_mobil")
+		else:
+			cutscenes.play("intro")
 	else:
-		cutscenes.play("RESET")
+		if vars.on_mobil:
+			cutscenes.play("RESET_mobil")
+		else:
+			cutscenes.play("RESET")
 	hit_collision.disabled = true
 	is_dying = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -87,6 +98,9 @@ func _ready() -> void:
 	#camera.position = Vector2(0, 0)
 	#up.position = Vector2(0, -200)
 	#down.position = Vector2(0, 1080)
+	
+	await get_tree().create_timer(16).timeout
+	vars.cut_played = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	#Can't Control
@@ -413,7 +427,7 @@ func reload() -> void:
 	get_tree().reload_current_scene()
 
 func enemy_hurt_entered(area: Area2D) -> void:
-	if area.get_parent() is Slime:
+	if area.get_parent() is Slime or Skeleton:
 		var knockback_direction = (area.global_position - global_position).normalized()
 		if att_state == 1:
 			area.get_parent().health_change(-20)

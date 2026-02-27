@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=4 uid="uid://bfwxhqcaypqqr"]
+[gd_scene format=4 uid="uid://bfwxhqcaypqqr"]
 
 [ext_resource type="Script" uid="uid://cf2halb8d0ptb" path="res://scripts/main_menu.gd" id="1_t7e0r"]
 [ext_resource type="FontFile" uid="uid://df62x3o6lbdp7" path="res://assets/monogram_font.ttf" id="2_wk0pr"]
@@ -966,7 +966,7 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Main Menu" type="Control"]
+[node name="Main Menu" type="Control" unique_id=653944516]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -975,7 +975,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t7e0r")
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=679871444]
 layout_mode = 0
 offset_top = -16.0
 offset_right = 1920.0
@@ -988,7 +988,7 @@ text = "SCARF"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Heart" type="TextureRect" parent="Title"]
+[node name="Heart" type="TextureRect" parent="Title" unique_id=1903382614]
 layout_mode = 0
 offset_left = 896.0
 offset_top = 223.0
@@ -998,12 +998,12 @@ rotation = 6.68801e-05
 scale = Vector2(1.40659, 1.40659)
 texture = ExtResource("3_rmr83")
 
-[node name="New Game" type="Button" parent="."]
-layout_mode = 2
+[node name="New Game" type="Button" parent="." unique_id=1213996068]
+layout_mode = 0
 offset_left = 621.0
-offset_top = 542.0
+offset_top = 484.0
 offset_right = 1275.0
-offset_bottom = 623.0
+offset_bottom = 565.0
 focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Quit")
 theme = ExtResource("4_rmr83")
@@ -1011,24 +1011,24 @@ theme_override_constants/h_separation = 9
 theme_override_font_sizes/font_size = 80
 text = "New Game"
 
-[node name="Load Game" type="Button" parent="."]
-layout_mode = 2
+[node name="Load Game" type="Button" parent="." unique_id=1755936396]
+layout_mode = 0
 offset_left = 727.0
-offset_top = 651.0
+offset_top = 593.0
 offset_right = 1153.0
-offset_bottom = 723.0
+offset_bottom = 665.0
 theme_override_colors/font_color = Color(0.303233, 0.303233, 0.303233, 1)
 theme_override_constants/h_separation = 9
 theme_override_fonts/font = ExtResource("2_wk0pr")
 theme_override_font_sizes/font_size = 80
 text = "Load Game"
 
-[node name="Quit" type="Button" parent="."]
-layout_mode = 2
+[node name="Quit" type="Button" parent="." unique_id=1301185116]
+layout_mode = 0
 offset_left = 766.0
-offset_top = 748.0
+offset_top = 690.0
 offset_right = 1112.0
-offset_bottom = 820.0
+offset_bottom = 762.0
 focus_neighbor_top = NodePath("../New Game")
 focus_neighbor_bottom = NodePath("../New Game")
 theme = ExtResource("4_rmr83")
@@ -1036,10 +1036,10 @@ theme_override_constants/h_separation = 9
 theme_override_font_sizes/font_size = 80
 text = "Quit"
 
-[node name="Sound Effect" type="AudioStreamPlayer" parent="."]
+[node name="Sound Effect" type="AudioStreamPlayer" parent="." unique_id=940796236]
 stream = ExtResource("5_8uxxo")
 
-[node name="ground" parent="." instance=ExtResource("6_s1050")]
+[node name="ground" parent="." unique_id=505817077 instance=ExtResource("6_s1050")]
 z_index = -1
 position = Vector2(-67, 10)
 
@@ -1078,7 +1078,10 @@ tile_map_data = PackedByteArray("AAAFACcAAAAAAAIAAAAFACgAAAAAAAMAAAAFACkAAAAAAAQ
 position = Vector2(-310, -2642)
 scale = Vector2(4.665, 4.665)
 
-[node name="Animater" type="AnimatedSprite2D" parent="."]
+[node name="water" parent="ground" index="7"]
+autoplay = &"water"
+
+[node name="Animater" type="AnimatedSprite2D" parent="." unique_id=225083420]
 z_index = -2
 position = Vector2(933, 917)
 scale = Vector2(5, 5)
