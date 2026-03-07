@@ -1,5 +1,6 @@
 # Scarf
 My First Published Game
+Free to PLAY!
 
 Controls  
 A / D – Move  
